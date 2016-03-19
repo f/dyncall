@@ -1,6 +1,6 @@
 # DynCall
 
-Dynamic method calling support for Crystal Language. Created to be used with [Kreal on Kemal](http://github.com/f/dyncall).
+Dynamic method calling support for Crystal Language. Created to be used with [Kreal on Kemal](http://github.com/f/kreal).
 
 ## Installation
 
