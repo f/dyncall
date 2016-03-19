@@ -35,7 +35,7 @@ end
 
 ### Simple API
 
-```
+```crystal
 user = User.new
 # Getting Shared Methods
 user.shared # => [:name, :surname]
