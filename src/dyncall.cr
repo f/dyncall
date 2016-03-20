@@ -1,9 +1,9 @@
 macro share(*method_names)
-  def shared
+  def self.shared
     {{method_names}}
   end
 
-  def shared?(method)
+  def self.shared?(method)
     {{method_names}}.includes? method
   end
 

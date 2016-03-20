@@ -38,10 +38,10 @@ end
 ```crystal
 user = User.new
 # Getting Shared Methods
-user.shared # => [:name, :surname]
+User.shared # => [:name, :surname]
 
 # Checking if method is shared
-user.shared? :name # => true
+User.shared? :name # => true
 
 # Calling shared method
 user.call :name, {name: "Fatih"} # => "Hi Fatih!"
