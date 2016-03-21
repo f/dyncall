@@ -15,7 +15,7 @@ end
 describe Dyncall do
   it "has true shareds" do
     todo = Todo.new
-    todo.shared.should eq [:hello, :world]
+    Todo.shared.should eq [:hello, :world]
   end
 
   it "static calls" do
@@ -27,5 +27,10 @@ describe Dyncall do
     todo = Todo.new
     todo.call(:hello, {text: "world"}).should eq "world"
     todo.call(:world).should eq "world"
+  end
+
+  it "calls by string" do
+    todo = Todo.new
+    todo.call("world").should eq "world"
   end
 end
