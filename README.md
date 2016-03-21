@@ -23,11 +23,11 @@ class User
   share :name, :surname
 
   # Shared methods has to have just one parameter as hash.
-  def name(args)
+  def self.name(args)
     "Hi #{args[:name]}!"
   end
 
-  def surname(args)
+  def self.surname(args)
     "Hello, Mr. #{args[:surname]}"
   end
 end
@@ -36,7 +36,6 @@ end
 ### Simple API
 
 ```crystal
-user = User.new
 # Getting Shared Methods
 User.shared # => [:name, :surname]
 
@@ -44,8 +43,8 @@ User.shared # => [:name, :surname]
 User.shared? :name # => true
 
 # Calling shared method
-user.call :name, {name: "Fatih"} # => "Hi Fatih!"
-user.call :surname, {surname: "Fatih"} # => "Hello, Mr. Fatih"
+User.call :name, {name: "Fatih"} # => "Hi Fatih!"
+User.call :surname, {surname: "Fatih"} # => "Hello, Mr. Fatih"
 ```
 
 ## Contributing
