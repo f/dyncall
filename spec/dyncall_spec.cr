@@ -1,7 +1,8 @@
 require "./spec_helper"
 
 class Todo
-  share :hello, :world
+  share_class_methods :hello, :world
+  share_instance_methods :bigger, :smaller, :bigger!
 
   def self.hello(args)
     args[0]
@@ -9,6 +10,23 @@ class Todo
 
   def self.world(args)
     "world"
+  end
+
+  getter word
+
+  def initialize(@word)
+  end
+
+  def bigger(args)
+    @word.upcase
+  end
+
+  def smaller(args)
+    @word.downcase
+  end
+
+  def bigger!(args)
+    @word = @word.upcase
   end
 end
 
@@ -28,5 +46,15 @@ describe Dyncall do
 
   it "calls by string" do
     Todo.call("world").should eq "world"
+  end
+
+  it "calls instances" do
+    todo = Todo.new("dYnCaLL")
+    todo.call(:bigger).should eq "DYNCALL"
+    todo.call(:smaller).should eq "dyncall"
+
+    todo.word.should eq "dYnCaLL"
+    todo.call(:bigger!)
+    todo.word.should eq "DYNCALL"
   end
 end

@@ -19,8 +19,8 @@ dependencies:
 require "dyncall"
 
 class User
-  # Use `share` macro to share methods.
-  share :name, :surname
+  # Use `share_instance_methods` or `share_class_methods` macro to share methods.
+  share_class_methods :name, :surname
 
   # Shared methods has to have just one parameter as hash.
   def self.name(args)
@@ -29,6 +29,20 @@ class User
 
   def self.surname(args)
     "Hello, Mr. #{args[:surname]}"
+  end
+
+  # Dyncall allows you to call instance methods.
+  share_instance_methods :name, :surname
+
+  def initialize(@n, @s)
+  end
+
+  def name(args)
+    @name.capitalize
+  end
+
+  def surname(args)
+    @name.upcase
   end
 end
 ```
@@ -45,6 +59,11 @@ User.shared? :name # => true
 # Calling shared method
 User.call :name, {name: "Fatih"} # => "Hi Fatih!"
 User.call :surname, {surname: "Fatih"} # => "Hello, Mr. Fatih"
+
+# Calling shared instance method
+user = User.new("fatih, "akin")
+user.call :name # => Fatih
+user.call :surname # => AKIN
 ```
 
 ## Contributing
