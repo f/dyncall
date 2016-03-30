@@ -1,7 +1,7 @@
 require "./spec_helper"
 
 class Todo
-  share_class_methods :hello, :world
+  share_class_methods :hello, :world, :sum
   share_instance_methods :bigger, :smaller, :bigger!
 
   def self.hello(args)
@@ -10,6 +10,10 @@ class Todo
 
   def self.world(args)
     "world"
+  end
+
+  def self.sum(args)
+    args[0] + args[1]
   end
 
   getter word
@@ -32,7 +36,7 @@ end
 
 describe Dyncall do
   it "has true shareds" do
-    Todo.shared.should eq [:hello, :world]
+    Todo.shared.should eq [:hello, :world, :sum]
   end
 
   it "static calls" do
@@ -46,6 +50,10 @@ describe Dyncall do
 
   it "calls by string" do
     Todo.call("world").should eq "world"
+  end
+
+  it "can work with other types" do
+    Todo.call(:sum, [1, 2]).should eq 3
   end
 
   it "calls instances" do
